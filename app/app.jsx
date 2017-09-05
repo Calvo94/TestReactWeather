@@ -7,11 +7,11 @@ import About from 'About';
 import Examples from 'Examples';
 
 // Load foundation
-require('style-loader!css-loader!foundation-sites/dist/foundation.min.css')
+require('foundation-sites/dist/foundation.min.css')
 $(document).foundation();
 
 // app css
-require('style-loader!css-loader!applicationStyles')
+require('applicationStyles')
 
 ReactDOM.render(
   <Router history={hashHistory}>

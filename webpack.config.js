@@ -31,7 +31,7 @@ plugins: [
       WeatherMessage: 'app/components/WeatherMessage.jsx',
       openWeatherMap: 'app/api/openWeatherMap.jsx',
       ErrorModal: 'app/components/ErrorModal.jsx',
-      applicationStyles: 'app/styles/app.css'
+      applicationStyles: 'app/styles/app.scss'
     },
     extensions: ['.js', '.jsx']
   },
@@ -44,8 +44,17 @@ plugins: [
         },
         test: /\.jsx?$/,
         exclude: /(node_module|bower_components)/
+      },
+      {
+        loader:['style-loader','css-loader'],
+        test: /\.css?$/
+      },
+      {
+        loader:['style-loader','css-loader', 'sass-loader'],
+        test: /\.scss?$/,
       }
-    ]
+
+    ],
   },
   devtool: 'inline-source-map'
 };
