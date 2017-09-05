@@ -7,7 +7,9 @@ import ErrorModal from 'ErrorModal';
 class  Weather extends Component{
   state={
       isLoading:false,
-      errorMessage: undefined
+      errorMessage: undefined,
+      location: undefined,
+      temp: undefined
     }
   handleSearch(location) {
     var that = this;
@@ -26,13 +28,31 @@ class  Weather extends Component{
     });
   }
 
+  componentDidMount() {
+    var location = this.props.location.query.location;
+
+    if(location && location.length > 0 ) {
+      this.handleSearch(location);
+      window.location.hash= '#/';
+    }
+  }
+
+  componentWillReceiveProps(newProps) {
+    var location = newProps.location.query.location;
+
+    if(location && location.length > 0 ) {
+      this.handleSearch(location);
+      window.location.hash= '#/';
+    }
+  }
+
   render() {
     var {isLoading, location, temp, errorMessage}= this.state;
 
     function renderMessage () {
       if(isLoading) {
-      } else if ( temp && location) {
         return <h3 className="text-center">Fetching weather...</h3>
+      } else if ( temp && location) {
         return <WeatherMessage location={location} temp={temp}/>
       }
     }
@@ -44,8 +64,6 @@ class  Weather extends Component{
         );
       }
     }
-
-
 
     return (
       <div>
